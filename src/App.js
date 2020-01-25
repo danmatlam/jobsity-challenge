@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+
 
 // REDUX -> SAGAS || MIDDLEWARE
 import { createStore, applyMiddleware, compose } from "redux";
@@ -25,10 +27,7 @@ function App() {
 
       <ReduxProvider store={store}> 
 
-        <header className="App-header"> </header>
-
-        <RemindersPage/>
-
+          <RemindersPage></RemindersPage>
       </ReduxProvider>
     </div>
   );
