@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 import BigCalendar from '../components/BigCalendar'
 import { connect } from 'react-redux';
 import { GET_REMINDERS, SAVE_REMINDER } from '../dao-actions/';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import { Reminders } from '../components/Reminders';
+import moment from 'moment';
 import styled from 'styled-components';
 
-
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { RemindersForm } from '../components/RemindersForm';
-import { Reminders } from '../components/Reminders';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        Gridor: theme.palette.text.secondary,
     },
 }));
 
@@ -29,23 +27,27 @@ const RemindersPage = ({
     remindersState
 }) => {
     const classes = useStyles();
+    const [selectedDate, setSelectedDate] = React.useState(null);
+
+    const onSelected = (selected) => {
+        const dateJs = new Date(selected);
+        const dateMoment = moment(dateJs);
+        setSelectedDate(dateMoment);
+    }
+
 
     useEffect(() => { getReminders() }, [])
     return (
         <Grid container>
-            <Grid item xs={8}
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                }}
-            >
-                <BigCalendar />
-
+            <Grid item xs={12} sm={8} md={8} lg={8} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', overflowX: 'auto' }}>
+                <BigCalendar onSelected={onSelected} />
             </Grid>
-            <Grid item xs={4}>
-            
-                <Reminders></Reminders>
+            <Grid item xs={12} sm={4} md={4} lg={4} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', overflowX: 'auto' }}>
+                <Reminders 
+                    selectedDate={selectedDate}
+                    remindersState={remindersState}
+                    saveReminders={saveReminders}
+                 />
             </Grid>
 
         </Grid>

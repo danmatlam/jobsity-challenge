@@ -14,16 +14,16 @@ const BigCalendarDay = ({
 
     const { reminders } = remindersState;
 
-    const remindersOnDay = reminders.filter(item => item.day === date);
+    const remindersOnDay = reminders.filter(item => item.date.day === date.format('YYYY/MM/DD'));
 
 
     return (
         <DayView>
-            <DayText>{date}</DayText>
+            <DayText>{date.format('DD')}</DayText>
             <RemindersBox>
                 {
                     remindersOnDay.map(item =>
-                        <ReminderItemBox>
+                        <ReminderItemBox key={item.idReminder}>
                             <ReminderItemText>
                                 {item.reminder}
                             </ReminderItemText>

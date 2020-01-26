@@ -19,18 +19,19 @@ const RenderDay = (day, selectedDate, dayInCurrentMonth, dayComponent) => {
   const momentObj = moment(dateObj);
   return (
   <BigCalendarDay 
-  date={momentObj.format('YYYY/MM/DD')}/>
+  date={momentObj}/>
   )
 }
 
 
-const BigCalendar = ({reminders}) => {
+const BigCalendar = ({reminders, onSelected }) => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   
   const handleDateChange = date => {
-    console.log('date..')
     setSelectedDate(date);
+    onSelected(date);
+    
   };
 
 

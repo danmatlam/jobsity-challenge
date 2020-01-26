@@ -27,18 +27,18 @@ const reminderReducer = (state = init, action) => {
     switch (action.type) {
         case GET_REMINDERS: return {
             ...state, 
-            loading:true,
+            loadingList:true,
         }
         case GET_REMINDERS_SUCCESS: 
         return {
             ...state,
-            loading:false,
+            loadingList:false,
             reminders:action.payload
         }
         case GET_REMINDERS_ERROR: return{
             ...state,
-            loading:false,
-            error: action.error
+            loadingList:false,
+            errorList: action.error
         }
 
 
@@ -48,11 +48,15 @@ const reminderReducer = (state = init, action) => {
                 ...state, 
                 loading:true,
             }
-            case SAVE_REMINDER_SUCCESS: return {
+            case SAVE_REMINDER_SUCCESS: 
+            debugger
+            return {
               ...state,
               reminders:[...state.reminders, action.payload],
               loading:false,
             }
+
+            
             case SAVE_REMINDER_ERROR: return{
                 ...state,
                 loading:false,
