@@ -17,9 +17,13 @@ import BigCalendarDay from './BigCalendarDay';
 const RenderDay = (day, selectedDate, dayInCurrentMonth, dayComponent) => {
   const dateObj = new Date(day);
   const momentObj = moment(dateObj);
+
+  const month = moment(selectedDate).format('MM')
   return (
   <BigCalendarDay 
-  date={momentObj}/>
+        month={month}
+        date={momentObj}
+  />
   )
 }
 

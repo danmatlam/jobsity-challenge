@@ -107,7 +107,10 @@ export const Reminders = ({
                   }}>
                     <Color color={item.color} />
                     <ListItemHour>
-                      <WeatherComponent iconId={item.forecast.weatherIcon}/>
+                      {item.forecast &&
+                       <WeatherComponent iconId={item.forecast.weatherIcon}/>
+                      }
+                     
                     </ListItemHour>
                     <ListItemHour>{item.date.time}</ListItemHour>
                     <ListItemText>{item.reminder}</ListItemText>

@@ -2,14 +2,22 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { GET_REMINDERS, SAVE_REMINDER } from '../dao-actions/';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const BigCalendarDay = ({
+
+    selectedDate,
     getReminders,
     saveReminders,
     remindersState,
     //
-    date
+    date,
+    month
 }) => {
+
+
+
+    debugger
 
 
     const { reminders } = remindersState;
@@ -19,7 +27,7 @@ const BigCalendarDay = ({
 
 
     return (
-        <DayView>
+        <DayView not={ date.format('MM') != month }>
             <DayText>{date.format('DD')}</DayText>
             <RemindersBox>
                 {
@@ -48,7 +56,9 @@ const DayView = styled.div`
   flex-direction:column;
   height:2.7em;
   width:2.7em;
-  background-color:#F8F8F8
+  background-color:#F8F8F8;
+ background-color: ${props => !props.not ? '#F8F8F8' : '#0a0a0a'}; 
+  cursor:${props=> props.not && 'not-allowed'}
 `;
 
 
@@ -79,7 +89,6 @@ const ReminderItemText = styled.div`
 
 
 
-/// CONNECT STORE
 
 
 const mapStateToProps = ({ remindersState }) => {
