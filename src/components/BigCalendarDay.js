@@ -14,7 +14,8 @@ const BigCalendarDay = ({
 
     const { reminders } = remindersState;
 
-    const remindersOnDay = reminders.filter(item => item.date.day === date.format('YYYY/MM/DD'));
+    let remindersOnDay =  reminders && reminders.filter(item => item.date.day === date.format('YYYY/MM/DD'));
+    remindersOnDay = remindersOnDay && remindersOnDay.sort((a, b) => (a.date.time > b.date.time) ? 1 : ((b.date.time > a.date.time) ? -1 : 0));
 
 
     return (
@@ -23,7 +24,7 @@ const BigCalendarDay = ({
             <RemindersBox>
                 {
                     remindersOnDay.map(item =>
-                        <ReminderItemBox key={item.idReminder}>
+                        <ReminderItemBox key={item.idReminder} color={item.color}>
                             <ReminderItemText>
                                 {item.reminder}
                             </ReminderItemText>
@@ -55,6 +56,7 @@ const DayText = styled.span`
   font-size:.45em;
 `;
 const RemindersBox = styled.div`
+    border-radius:.09em;
     display:flex;
     flex-direction:column;
     overflow-y: scroll;
@@ -63,7 +65,7 @@ const RemindersBox = styled.div`
 
 const ReminderItemBox = styled.div`
     margin:.06em;
-    background-color:orange;
+    background-color:${props=>props.color};
 
 `;
 

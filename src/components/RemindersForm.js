@@ -15,14 +15,18 @@ import { Button } from '@material-ui/core';
 
 const RemindersForm = (props) => {
 
+  
+
     const [reminderLength, setReminderLength] = useState(0);
 
-    const [reminder, setReminder] = useState('');
-    const [hour, setHour] = useState(new Date);
-    const [country, setCountry] = useState(null);
-    const [city, setCity] = useState(null);
-    const [color, setColor] = useState(null);
+    const [idReminder, setIdReminder] = useState(props.idReminder || null);
+    const [reminder, setReminder] = useState(props.reminder || null);
+    const [hour, setHour] = useState( props.date ? moment(`${props.date.day} ${props.date.time}`, 'YYYY/MM/DD HH:mm') :null);
+    const [country, setCountry] = useState(props.country || null);
+    const [city, setCity] = useState(props.city || null);
+    const [color, setColor] = useState(props.color || null);
 
+    debugger;
 
 
     //ZONE USE
@@ -34,19 +38,16 @@ const RemindersForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         const payload = {
-            reminder, 
-            hour, 
-            country, 
-            city,
-            color,
-
-            selectedDate:props.selectedDate,
+            idReminder, reminder, hour, country, city, color,
+            //
+            selectedDate: props.selectedDate,
             countryObj,
             cityObj,
         };
 
+        props.handleClose();
         props.handleSubmit(payload)
-     
+
     };
 
     ///
@@ -59,11 +60,12 @@ const RemindersForm = (props) => {
     };
 
     const handleHourChange = date => {
-        setHour(hour);
+        setHour(new Date(date));
     };
 
     const handleCountryChange = (event, value) => {
-        setCountry(value && value.sortname ? value.sortname : null);
+        debugger;
+        setCountry(value && value.name ? value.name : null);
         setCountryObj(value ? value : null);
     }
 
@@ -73,7 +75,10 @@ const RemindersForm = (props) => {
         setCityObj(value ? value : null);
     }
 
- 
+    const handleColorChange = (value)=>{
+            setColor(value)
+    }
+
 
 
     //ZONE OPTIONS
@@ -95,14 +100,12 @@ const RemindersForm = (props) => {
             title: item.name
         }));
         citiesOptions = citiesOptions.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-
     }
 
     return (
-        <form 
-        onSubmit={handleSubmit}
-        noValidate style={{ padding: '2em', display:'flex', flexDirection:'column', alignItems:'center'}}>
-
+        <form
+            onSubmit={handleSubmit}
+            noValidate style={{ padding: '2em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
             <Input
                 label="Reminder"
@@ -120,8 +123,8 @@ const RemindersForm = (props) => {
                 onChange={handleHourChange}
             />
 
-            <ColorPicker 
-                onChange={setColor}
+            <ColorPicker
+                onChange={handleColorChange}
             />
 
             <AutoCompletePicker
@@ -135,14 +138,14 @@ const RemindersForm = (props) => {
             <AutoCompletePicker
                 label='City'
                 options={citiesOptions && citiesOptions}
-                inputValue=''
+                inputValue={city}
                 onChange={handleCityChange}
 
             />
 
 
-<Button variant="contained" color="primary" type='submit'>
-  Guardar
+            <Button variant="contained" color="primary" type='submit'>
+                Guardar
 </Button>
 
 

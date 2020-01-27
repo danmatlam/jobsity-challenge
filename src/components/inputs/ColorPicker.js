@@ -8,26 +8,20 @@ const ColorPicker = ({onChange}) => {
     const [colorList, setColorList] = useState(
         [
             {
-                color: '#a069f3'
+                color: '#dc3545'
 
             },
             {
-                color: '#fdc050'
+                color: '#ffc107'
             },
             {
-                color: '#bcbcbc'
+                color: '#28a745'
             },
             {
-                color: '#241a28',
+                color: '#007bff',
             },
             {
-                color: '#6c6b6d'
-            },
-            {
-                color: '#cb7710',
-            },
-            {
-                color: '#62c3ed'
+                color: '#17a2b8'
             }
         ]
 
@@ -51,8 +45,10 @@ const ColorPicker = ({onChange}) => {
 
     const hanldeColorChange = (index) => {    
        const newColors = updateObjectInArray(colorList, index);
-       onChange(colorList[index].color);
        setColorList([ ...newColors])
+
+       onChange(colorList[index].color);
+
     }
 
 

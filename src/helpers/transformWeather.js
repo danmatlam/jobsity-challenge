@@ -60,15 +60,19 @@ export const transformForeCast = forecast_data => {
         let { humidity, temp } = weather_data.main;
         let { speed } = weather_data.wind;
         let weatherState = getWeatherState(weather_data.weather[0]);
+        let weatherIcon = weather_data.weather[0].id
         const dateObj = new Date(weather_data.dt_txt);
         const momentObj = moment(dateObj);
+
+        debugger
         foreCastArrAux.push({
             humidity,
             temperture: temp,
             weatherState,
+            weatherIcon,
             wind: `${speed} m/s`,
             day: momentObj.format('YYYY/MM/DD'),
-            hour: momentObj.format('HH:00')
+            hour: momentObj.format('HH:00'), 
 
         })
 

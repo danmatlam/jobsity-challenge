@@ -16,7 +16,7 @@ export const AutoCompletePicker = ({ onChange,options, label, inputValue }) => {
                     <TextField {...params} label={label} variant="outlined" fullWidth />
                 )}
 
-                // inputValue={inputValue}
+                inputValue={inputValue}
             />
         </div>
 
