@@ -17,9 +17,6 @@ const BigCalendarDay = ({
 
 
 
-    debugger
-
-
     const { reminders } = remindersState;
 
     let remindersOnDay =  reminders && reminders.filter(item => item.date.day === date.format('YYYY/MM/DD'));

@@ -98,7 +98,6 @@ const reminderReducer = (state = init, action) => {
 
 const replaceRemidner = (reminders, reminder) => {
     const i = reminders.findIndex(item => item.idReminder === reminder.idReminder);
-    debugger;
     reminders[i] = reminder;
     return reminders;
 };
@@ -112,7 +111,6 @@ const deleteReminder = (reminders, reminder) => {
 
 
 const deleteReminderList = (reminders, remindersDelete) => {
-    debugger;
     var result = reminders.filter(el => !remindersDelete.includes(el));
     console.log(result);
     return result;

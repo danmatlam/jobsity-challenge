@@ -26,7 +26,6 @@ const RemindersForm = (props) => {
     const [city, setCity] = useState(props.city || null);
     const [color, setColor] = useState(props.color || null);
 
-    debugger;
 
 
     //ZONE USE
@@ -64,7 +63,6 @@ const RemindersForm = (props) => {
     };
 
     const handleCountryChange = (event, value) => {
-        debugger;
         setCountry(value && value.name ? value.name : null);
         setCountryObj(value ? value : null);
     }

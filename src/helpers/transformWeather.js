@@ -64,7 +64,6 @@ export const transformForeCast = forecast_data => {
         const dateObj = new Date(weather_data.dt_txt);
         const momentObj = moment(dateObj);
 
-        debugger
         foreCastArrAux.push({
             humidity,
             temperture: temp,
@@ -88,12 +87,19 @@ const validateHour = (hour) => {
         onlyHour++;
     };
     const multiplex3 = n => {
+        let hour = 0;
         if (n > 0)
-            return Math.ceil(n / 3.0) * 3;
+            hour =  Math.ceil(n / 3.0) * 3;
         else if (n < 0)
-            return Math.floor(n / 3.0) * 3;
+            hour = Math.floor(n / 3.0) * 3;
         else
-            return 3;
+         hour = 3;
+
+         if(hour.toString().length==1){
+             hour=`0${hour}`;
+         }
+
+         return hour;
     };
     let multiplex = multiplex3(onlyHour);
     if (multiplex > 21) {
@@ -106,7 +112,9 @@ const validateHour = (hour) => {
 }
 
 export const filterForecast = (forecastArray, selectedDate, selectedHour) => {
+    debugger
     const validHour = validateHour(selectedHour)+':00';
+
     let forecastAux = forecastArray.filter(item => item.day === selectedDate);
         forecastAux = forecastAux.filter(item => item.hour === validHour);
     return forecastAux;

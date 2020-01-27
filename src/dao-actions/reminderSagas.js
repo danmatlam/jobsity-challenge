@@ -13,6 +13,8 @@ import {
     DELETE_REMINDER_LIST_ERROR
 
 } from './index';
+
+
 import { transformWeather, transformForeCast, filterForecast } from "../helpers/transformWeather";
 
 const reminders = [
@@ -91,6 +93,8 @@ export function* saveReminderSaga(action) {
     //GET FORECAST OPEN WEATHER MAP
     let foreCastData = yield call(getForecast, { city: payload.city, country: payload.country });
     foreCastData = foreCastData.data.cod == 200 && transformForeCast(foreCastData.data);
+
+    debugger;
 
     const foreCastOnday = filterForecast(
         foreCastData,
