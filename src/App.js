@@ -12,9 +12,12 @@ import reducers from './dao-reducers/reducers';
 import {watcherSaga} from './dao-actions/sagas';
 import RemindersPage from './pages/RemindersPage';
 const sagaMiddleWare = createSagaMiddleware(); 
-const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const store = createStore(reducers,
-compose(applyMiddleware(sagaMiddleWare), reduxDevTools)
+// const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = createStore
+(reducers,compose(applyMiddleware(sagaMiddleWare), 
+
+// reduxDevTools
+)
 );
 sagaMiddleWare.run(watcherSaga);
 // END REDUX -> SAGAS || MIDDLEWARE
