@@ -32,11 +32,11 @@ const reminders = [
 
 
 const getWeather = ({ city, country }) => {
-    return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=67621edb94d7a57a0f4bbdc93df84cc4&units=metric`);
+    return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=67621edb94d7a57a0f4bbdc93df84cc4&units=metric`);
 }
 
 const getForecast = ({ city, country }) => {
-    return axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=67621edb94d7a57a0f4bbdc93df84cc4&units=metric`);
+    return axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=67621edb94d7a57a0f4bbdc93df84cc4&units=metric`);
 }
 
 
